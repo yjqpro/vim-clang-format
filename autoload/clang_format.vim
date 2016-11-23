@@ -143,10 +143,10 @@ endfunction
 
 function! s:shellescape(str) abort
     if s:on_windows && (&shell =~? 'cmd\.exe')
-        return '^"' . substitute(substitute(substitute(a:str,
+        return '"' . substitute(substitute(substitute(a:str,
                     \ '[&|<>()^"%]', '^\0', 'g'),
                     \ '\\\+\ze"', '\=repeat(submatch(0), 2)', 'g'),
-                    \ '\^"', '\\\0', 'g') . '^"'
+                    \ '\^"', '\\\0', 'g') . '"'
     endif
     return shellescape(a:str)
 endfunction
